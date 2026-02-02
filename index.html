@@ -12,20 +12,26 @@
     <!-- Detta är koden från mitt exempel, skriv gärna egen HTML om så önskas -->
     <section class="form-wrapper" id="formWrapper">
       <form class="form" id="form">
-        <h1>Welcome young pokemon trainer</h1>
+        <h1 class="form__title" id="formTitle">Welcome young pokemon trainer</h1>
         <h3>Please enter your name</h2>
-        <input id="nick" type="text" placeholder="Trainer nickname" />
-        <input id="age" type="text" placeholder="Trainer age">
-        <p>Are you a boy? Or are you a girl?</p>
-        <label>
-          <input type="radio" name="gender" id="boy">
-          Boy
-        </label>
-        <label>
-          <input type="radio" name="gender" id="girl">
-          Girl
-        </label>
-        <button id="submitBtn">Let's catch some pokemons!</button>
+        <input class="form__input" id="nick" type="text" placeholder="Trainer nickname" />
+        <br>
+        <h3>What's your age?</h3>
+        <input class="form__input" id="age" type="text" placeholder="Trainer age">
+        <h4>Are you a boy? Or are you a girl?</h4>
+        <div class="form__gender-wrapper" id="formGenderWrapper">
+          <label>
+            <input class="form__radio-input" type="radio" name="gender" id="boy">
+            Boy
+          </label> 
+          <label>
+            <input class="form__radio-input" type="radio" name="gender" id="girl">
+            Girl
+          </label>
+        </div>
+        <br>
+        <p class="form__error-msg" id="formErrorMsg"></p>
+        <button class="form__submit-btn" id="submitBtn">Let's catch some pokemons!</button>
       </form>
     </section>
     <section id="gameField" class="game-field d-none">
@@ -35,7 +41,7 @@
             <ol class="highscore-list" id="highscoreList">
 
             </ol>
-            <button id="playAgainBtn">Play again?</button>
+            <button class="" id="playAgainBtn">Play again?</button>
         </section>
     </section>
     
