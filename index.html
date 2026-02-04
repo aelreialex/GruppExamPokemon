@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <script src="./scripts/oGameData.js"></script>
+    <script type="module" src="./scripts/script.js"></script>
+    <title>Gotta catch 'em all</title>
+  </head>
+  <body>
+    <!-- Detta är koden från mitt exempel, skriv gärna egen HTML om så önskas -->
+    <section class="form-wrapper" id="formWrapper">
+      <form class="form" id="form">
+        <h1 class="form__title" id="formTitle">Welcome young pokemon trainer</h1>
+        <h3>Please enter your name</h2>
+        <input class="form__input" id="nick" type="text" placeholder="Trainer nickname" />
+        <br>
+        <h3>What's your age?</h3>
+        <input class="form__input" id="age" type="text" placeholder="Trainer age">
+        <h4>Are you a boy? Or are you a girl?</h4>
+        <div class="form__gender-wrapper" id="formGenderWrapper">
+          <label>
+            <input class="form__radio-input" type="radio" name="gender" id="boy">
+            Boy
+          </label> 
+          <label>
+            <input class="form__radio-input" type="radio" name="gender" id="girl">
+            Girl
+          </label>
+        </div>
+        <br>
+        <p class="form__error-msg" id="formErrorMsg"></p>
+        <button class="btn" id="submitBtn">Let's catch some pokemons!</button>
+      </form>
+    </section>
+    <section id="gameField" class="game-field d-none">
+        <section class="high-score d-none" id="highScore">
+            <h1>Congratulations!</h1>
+            <h3 id="winMsg"></h3>
+            <ol class="highscore-list" id="highscoreList">
+
+            </ol>
+            <button class="btn" id="playAgainBtn">Play again?</button>
+        </section>
+        <button class="game-field__audio-btn" id="audio"></button>
+    </section>
+    
+    <!-- Läs in audioelementet från DOMen. För att spela .play(), för att pausa .pause(), för att starta om .load()  -->
+    <audio src="./assets/pokemon_vs_trainer.mp3"></audio>
+  </body>
+</html>
