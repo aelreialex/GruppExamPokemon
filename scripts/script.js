@@ -72,7 +72,7 @@ function startGame() {
 	document.querySelector("audio").load();
 	startMusic();
 	document.querySelector("body").style.backgroundImage =
-		`url(../assets/arena-background.png)`;
+		`url(./assets/arena-background.png)`;
 	document.querySelector("#formWrapper").classList.add("d-none");
 	document.querySelector("#gameField").classList.remove("d-none");
 	document.querySelector("#audio").addEventListener("click", toggleMusic);
@@ -124,11 +124,11 @@ function drawPokemons() {
 		const imgRef = document.createElement("img");
 
 		if (pokemon < 10) {
-			imgRef.src = `../assets/pokemons/00${pokemon}.png`;
+			imgRef.src = `./assets/pokemons/00${pokemon}.png`;
 		} else if (pokemon < 100) {
-			imgRef.src = `../assets/pokemons/0${pokemon}.png`;
+			imgRef.src = `./assets/pokemons/0${pokemon}.png`;
 		} else {
-			imgRef.src = `../assets/pokemons/${pokemon}.png`;
+			imgRef.src = `./assets/pokemons/${pokemon}.png`;
 		}
 		const originalImg = imgRef.src;
 		imgRef.style.left = `${oGameData.getLeftPosition()}px`;
@@ -138,7 +138,7 @@ function drawPokemons() {
 
 		imgRef.addEventListener("mouseover", () => {
 			if (imgRef.src === originalImg) {
-				imgRef.src = "../assets/ball.webp";
+				imgRef.src = "./assets/ball.webp";
 				oGameData.nmbrOfCaughtPokemons++;
 				log(oGameData.nmbrOfCaughtPokemons);
 				checkWin();
