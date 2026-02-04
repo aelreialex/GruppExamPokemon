@@ -53,7 +53,6 @@ function validateForm() {
 			genderRef.classList.add("form__gender-wrapper--error");
 			throw { msg: "Du måste välja ett kön!" };
 		}
-
 		return true;
 	} catch (error) {
 		log(error.msg);
@@ -70,6 +69,7 @@ function clearError(nameRef, ageRef, genderRef, errorRef) {
 }
 
 function startGame() {
+	document.querySelector("audio").load();
 	startMusic();
 	document.querySelector("body").style.backgroundImage =
 		`url(../assets/arena-background.png)`;
@@ -84,8 +84,8 @@ function startGame() {
 }
 
 function startMusic() {
-	//document.querySelector("audio").load();
-	//document.querySelector("audio").play();
+	document.querySelector("audio").play();
+	document.querySelector("audio").volume = 0.3;
 }
 
 function toggleMusic() {
@@ -167,6 +167,7 @@ function gameOver() {
 	for (let img of imgRef) {
 		img.remove();
 	}
+	displayHighscores(saveHighscore());
 }
 
 function timer() {
@@ -185,3 +186,48 @@ function myInterval() {
 
 // I denna fil skriver ni all er kod
 log(new Date());
+
+function loadHighscore() {
+	const scores = localStorage.getItem("pokemonHighscores");
+return JSON.parse(scores) || [];
+}
+
+function saveHighscore() {
+	const scores = loadHighscore();
+	const name = oGameData.trainerName;
+	const age = oGameData.trainerAge;
+	const gender = oGameData.trainerGender;
+	const time = oGameData.nmbrOfMilliseconds();
+	scores.push({name, age, gender, time});
+	scores.sort((a, b) => a.time - b.time);
+	if (scores.length > 10) scores.splice(10);
+	localStorage.setItem('pokemonHighscores', JSON.stringify(scores));
+	console.log(scores);
+	return scores;
+}
+
+function displayHighscores(scores) {
+	document.querySelector('#highScore').classList.remove("d-none");
+	document.querySelector('#winMsg').textContent = `Bra jobbat ${oGameData.trainerName}! Du fångade alla pokemons på ${oGameData.nmbrOfMilliseconds()}millisekunder!`;
+	const list = document.querySelector("#highscoreList");
+	list.innerHTML = "";
+	scores.forEach((score, index) => {
+		const li = document.createElement("li");
+		li.textContent = `${score.name}, ${score.age} år,  ${score.gender} - ${score.time}ms`;
+		list.classList.add('highscore-list__list-item');
+		list.appendChild(li);
+	});
+	document.querySelector('#playAgainBtn').addEventListener('click', () => {
+		resetGame();
+	})
+}
+
+function resetGame() {
+	oGameData.init();
+	document.querySelector('#highScore').classList.add('d-none');
+	document.querySelector("#gameField").classList.add("d-none");
+	document.querySelector("#formWrapper").classList.remove("d-none");
+	document.querySelector("audio").pause();
+
+}
+
