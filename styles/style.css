@@ -20,6 +20,15 @@ body {
 	height: 100vh;
 }
 
+.btn {
+			width: 80%;
+			padding: 0.5rem;
+			border: none;
+			border-radius: 8px;
+			color: yellow;
+			background-color: red;
+		}
+
 .form-wrapper {
 	background-color: rgba(255, 255, 255, 0.7);
 	border-radius: 8px;
@@ -40,14 +49,7 @@ body {
 			outline: 2px solid red;
 		}
 
-		.form__submit-btn {
-			width: 80%;
-			padding: 0.5rem;
-			border: none;
-			border-radius: 8px;
-			color: yellow;
-			background-color: red;
-		}
+		
 	}
 
 	.form__gender-wrapper--error {
@@ -56,6 +58,8 @@ body {
 }
 
 .game-field {
+	display: grid;
+	place-items: center;
 	width: 100vw;
 	height: 100vh;
 
@@ -75,8 +79,18 @@ body {
 		width: 300px;
 		height: 300px;
 	}
+
+	.high-score {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 8px;
+	padding: 1rem;
+	}
 }
 
 .d-none {
-	display: none;
+	display: none !important;
 }
