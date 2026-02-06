@@ -21,13 +21,21 @@ body {
 }
 
 .btn {
-			width: 80%;
-			padding: 0.5rem;
-			border: none;
-			border-radius: 8px;
-			color: yellow;
-			background-color: red;
-		}
+	width: 80%;
+	padding: 0.5rem;
+	border: none;
+	border-radius: 8px;
+	color: yellow;
+	background-color: red;
+	cursor: pointer;
+}
+
+.material-symbols-outlined {
+	font-size: 20px;
+	/* Optional: Adjusting these ensures the icon stays centered and crisp */
+	font-variation-settings: "OPSZ" 20;
+	vertical-align: middle;
+}
 
 .form-wrapper {
 	background-color: rgba(255, 255, 255, 0.7);
@@ -48,8 +56,6 @@ body {
 		.form__input--error {
 			outline: 2px solid red;
 		}
-
-		
 	}
 
 	.form__gender-wrapper--error {
@@ -68,10 +74,13 @@ body {
 		top: 1rem;
 		right: 1rem;
 
-		width: 30px;
-		height: 30px;
+		width: 42px;
+		height: 42px;
 		border-radius: 50%;
-		background-color: yellow;
+		background-color: lightgreen;
+	}
+	.game-field__audio-btn--off {
+		background-color: lightcoral;
 	}
 
 	.game-field__img {
@@ -81,13 +90,13 @@ body {
 	}
 
 	.high-score {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1rem;
-	background-color: rgba(255, 255, 255, 0.7);
-	border-radius: 8px;
-	padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		background-color: rgba(255, 255, 255, 0.7);
+		border-radius: 8px;
+		padding: 1rem;
 	}
 }
 
