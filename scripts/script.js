@@ -49,6 +49,9 @@ function validateForm() {
 		} else if (oGameData.trainerAge < 10 || oGameData.trainerAge > 15) {
 			ageRef.classList.add("form__input--error");
 			throw { msg: "Du måste vara mellan 10 och 15 år gammal!" };
+		} else if (isNaN(oGameData.trainerAge)) {
+			ageRef.classList.add("form__input--error");
+			throw { msg: "Skriv ålder med nummer!" };
 		} else if (oGameData.trainerGender === null) {
 			genderRef.classList.add("form__gender-wrapper--error");
 			throw { msg: "Du måste välja ett kön!" };
@@ -85,33 +88,37 @@ function startGame() {
 
 function startMusic() {
 	document.querySelector("audio").play();
-	document.querySelector("audio").volume = 0.3;
+	document.querySelector("audio").volume = 0.05;
+	document.querySelector("#audioIcon").textContent = "volume_up";
+	document
+		.querySelector("#audio")
+		.classList.remove("game-field__audio-btn--off");
 }
 
 function toggleMusic() {
 	if (!document.querySelector("audio").paused) {
 		document.querySelector("audio").pause();
+		document.querySelector("#audioIcon").textContent = "volume_off";
+		document
+			.querySelector("#audio")
+			.classList.add("game-field__audio-btn--off");
 	} else {
 		document.querySelector("audio").play();
+		document.querySelector("#audioIcon").textContent = "volume_up";
+		document
+			.querySelector("#audio")
+			.classList.remove("game-field__audio-btn--off");
 	}
 }
 
 function randomizePokemon() {
 	log("randomizePokemon()");
-	let isDone = false;
-	let cycleCounter = 0;
 
-	while (!isDone) {
+	while (oGameData.pokemonNumbers.length < 10) {
 		const randomNum = Math.floor(Math.random() * 151 + 1);
 
-		if (oGameData.pokemonNumbers.includes(randomNum)) {
-		} else {
-			oGameData.pokemonNumbers[cycleCounter] = randomNum;
-			cycleCounter++;
-		}
-
-		if (cycleCounter === 10) {
-			isDone = true;
+		if (!oGameData.pokemonNumbers.includes(randomNum)) {
+			oGameData.pokemonNumbers.push(randomNum);
 		}
 	}
 }
@@ -189,7 +196,7 @@ log(new Date());
 
 function loadHighscore() {
 	const scores = localStorage.getItem("pokemonHighscores");
-return JSON.parse(scores) || [];
+	return JSON.parse(scores) || [];
 }
 
 function saveHighscore() {
@@ -198,36 +205,37 @@ function saveHighscore() {
 	const age = oGameData.trainerAge;
 	const gender = oGameData.trainerGender;
 	const time = oGameData.nmbrOfMilliseconds();
-	scores.push({name, age, gender, time});
+	scores.push({ name, age, gender, time });
 	scores.sort((a, b) => a.time - b.time);
 	if (scores.length > 10) scores.splice(10);
-	localStorage.setItem('pokemonHighscores', JSON.stringify(scores));
+	localStorage.setItem("pokemonHighscores", JSON.stringify(scores));
 	console.log(scores);
 	return scores;
 }
 
 function displayHighscores(scores) {
-	document.querySelector('#highScore').classList.remove("d-none");
-	document.querySelector('#winMsg').textContent = `Bra jobbat ${oGameData.trainerName}! Du fångade alla pokemons på ${oGameData.nmbrOfMilliseconds()}millisekunder!`;
+	document.querySelector("#highScore").classList.remove("d-none");
+	document.querySelector("#winMsg").textContent =
+		`Bra jobbat ${oGameData.trainerName}! Du fångade alla pokemons på ${oGameData.nmbrOfMilliseconds()}millisekunder!`;
 	const list = document.querySelector("#highscoreList");
 	list.innerHTML = "";
 	scores.forEach((score, index) => {
 		const li = document.createElement("li");
 		li.textContent = `${score.name}, ${score.age} år,  ${score.gender} - ${score.time}ms`;
-		list.classList.add('highscore-list__list-item');
+		list.classList.add("highscore-list__list-item");
 		list.appendChild(li);
 	});
-	document.querySelector('#playAgainBtn').addEventListener('click', () => {
+	document.querySelector("#playAgainBtn").addEventListener("click", () => {
 		resetGame();
-	})
+	});
 }
 
 function resetGame() {
 	oGameData.init();
-	document.querySelector('#highScore').classList.add('d-none');
+	document.querySelector("#highScore").classList.add("d-none");
 	document.querySelector("#gameField").classList.add("d-none");
 	document.querySelector("#formWrapper").classList.remove("d-none");
 	document.querySelector("audio").pause();
-
+	document.querySelector("body").style.backgroundImage =
+		`url(../assets/background.png)`;
 }
-
